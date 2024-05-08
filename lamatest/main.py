@@ -1,34 +1,60 @@
 import ollama
-import webbrowser
-import requests
 
-#dolphin-llama3
-#llama3
+moduleDetectionPrompt = open("firstPhasePrompt.txt", "r").read()
+modules = open("modules.txt", "r").read().split("\n")
 
-modelfile='''
-FROM dolphin-llama3
-SYSTEM You are JARVIS. Personal assistant of me, batuhan. Your answers will be used wtih text to speech so dont give long answers if it is not needed. Be witty.
-'''
-
-# you have to categorize the prompt into these classes and answer with only the name of the class : need to search google, lamps on , move arm, other
+# moduleDetectorModelFile = f'''
+# FROM dolphin-llama3
+# {moduleDetectionPrompt}'''
 
 
-r = ollama.create(model='jarvis', modelfile=modelfile)
-  
-  
+#r = ollama.create(model='modeuleDetector', modelfile=moduleDetectorModelFile)
+# Home Automation
+# Personal Assistant
+# Entertainment and Media
+# Navigation and Travel
+# Shopping and Logistics
+# Security and Monitoring
+# Health and Wellness
+# Educational and Informational
+# Casual Talk  
   
 while True:
-    message = input()
+    
+    allocatedModule = ""
+    
+    message = input("You:")
     if message == 'exit':
         break
     
     stream = ollama.chat(
-    model='jarvis',
-    messages=[{'role': 'user', 'content': message}],
+    model='dolphin-llama3',
+    messages=[{'role': 'user', 'content': message}, {'role': 'system', 'content': moduleDetectionPrompt}],
     stream=True,
 )
 
+    print("=======")
+    res = ""
     for chunk in stream:
-        print(chunk['message']['content'], end='', flush=True)
-    print()
+        
+        chunk['message']['content']
+        res+=chunk['message']['content']
+        
+        foundModule = False
+        
+        for moduleName in modules:
+            if moduleName in res:
+                allocatedModule = moduleName
+                print("Module: " + moduleName)
+                res = ""
+                foundModule = True
+                break
+            
+        if foundModule:
+            break
+        
     
+    if allocatedModule == "Home Automation":
+        print("Home Automation Module")
+    elif allocatedModule == "Web Browser":
+        print("Web Browser Module")

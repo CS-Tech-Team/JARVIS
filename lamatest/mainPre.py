@@ -23,9 +23,12 @@ SYSTEM You are JARVIS. Personal assistant of me, batuhan. Your answers will be u
 r = ollama.create(model='jarvis', modelfile=modelfile)
   
   
+
+  
+  
   
 while True:
-    message = input()
+    message = input("You:")
     if message == 'exit':
         break
     
@@ -36,6 +39,6 @@ while True:
 )
 
     for chunk in stream:
-        print(chunk['message']['content'], end='', flush=True)
+        print("Jarvis: " + chunk['message']['content'], end='', flush=True)
     print()
     
