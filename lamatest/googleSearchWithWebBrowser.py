@@ -78,9 +78,9 @@ if __name__ == "__main__":
     
     result = processRequest(data)
 
-    # openGoogleOnBrowser(result)
+
     url=openGoogleOnBrowser(result)
-    get_page(url)
+    
     
     
     # print(result)
