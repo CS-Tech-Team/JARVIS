@@ -59,12 +59,12 @@ def processRequest(data, model_name="llama3"):
 
     return output
 
-def get_page(url):
-    res=requests.get(url)
-    html_page=BeautifulSoup(res.content,"lxml")
+# def get_page(url):
+#     res=requests.get(url)
+#     html_page=BeautifulSoup(res.content,"lxml")
     
-    searching_site=html_page.find("div",class_="dURPMd")
-    print(searching_site)
+#     searching_site=html_page.find("div",class_="dURPMd")
+#     print(searching_site)
     
     
 
