@@ -1,7 +1,9 @@
 import ollama
 import webbrowser
+import requests
+from bs4 import BeautifulSoup
 
-SYSTEM_PROMPT = "You are 'Al', a helpful AI Assistant that can determine which term to search on google."
+SYSTEM_PROMPT = "You are 'Al', a helpful AI Assistant that can determine which term to search on google.And term that you gave me is supposed to be between ** and **. Like **searchterm**"
 
 
 def generate(prompt):
@@ -17,6 +19,17 @@ def formatPromptSearch(example):
     return "\n".join([sys_prompt, services_block, question, term])
 
 def openGoogleOnBrowser(modelResult):
+    search_term=modelResult.split("**")[1].replace(" ","+")
+    base_url="https://www.google.com/search?q="
+    last_url=base_url+f"{search_term}"
+    webbrowser.open(last_url)
+    return last_url
+    
+    
+    
+    
+    
+    
     
     """
     extract the searchTerm from modelResult
@@ -44,18 +57,34 @@ def processRequest(data, model_name="llama3"):
     prompt = formatPromptSearch(data)
     output = generate(prompt)
 
-    print(output)
+    return output
+
+def get_page(url):
+    res=requests.get(url)
+    html_page=BeautifulSoup(res.content,"lxml")
+    
+    searching_site=html_page.find("div",class_="dURPMd")
+    print(searching_site)
+    
+    
 
 if __name__ == "__main__":
 
     exampleServices = ["google search"]
     
-    exampleRequest = "search Nural Networks on goole."
+    exampleRequest = "search when was internet invented on google."
     
     data = createInputFormat(exampleServices, exampleRequest)
     
     result = processRequest(data)
-    print(result)
+
+    # openGoogleOnBrowser(result)
+    url=openGoogleOnBrowser(result)
+    get_page(url)
+    
+    
+    # print(result)
+    
     
     
 """
