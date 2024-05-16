@@ -80,7 +80,7 @@ if __name__ == "__main__":
     exampleStates = [
         "light.kitchen_sink = on",
         "light.kitchen_lamp = on",
-        "light.office_desk_lamp = off",
+        "light.office_desk_lamp = on",
         "light.family_room_overhead = on",
         "fan.family_room = off",
         "lock.front_door = locked"
