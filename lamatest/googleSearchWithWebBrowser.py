@@ -4,7 +4,7 @@ import requests
 import search_api
 from bs4 import BeautifulSoup
 
-SYSTEM_PROMPT = "You are 'Al', a helpful AI Assistant that can determine which term to search on google.And term that you gave me is supposed to be between ** and **. Like **searchterm**"
+SYSTEM_PROMPT = "You are 'Al', a helpful AI Assistant that can determine which term to search on google.And term that you gave me is supposed to be between ** and ** not between 'and '. Like **searchterm**"
 
 
 def generate(prompt):
@@ -73,7 +73,8 @@ def processRequest(data, model_name="llama3"):
 def analyze_link_to_access_content(searched_first_link):
     result =requests.get(searched_first_link)
     soup=BeautifulSoup(result.content,"html.parser")
-    print(soup.text.strip())
+    # print(soup.text.strip())
+    return soup.text.strip()
     
     
 
@@ -89,16 +90,20 @@ if __name__ == "__main__":
     
     result = processRequest(data)
     search_query=result.split("**")[1]
+    search_query.replace('"',"")
    
     link=search_api.perform_google_search(search_query)
+ 
     
-    # print(link)
+    print(link)
     openGoogleOnBrowser(link)
+    content_of_link=analyze_link_to_access_content(link)
+    print(content_of_link)
     
-    analyze_link_to_access_content(link)
-
+    
 
     # url=openGoogleOnBrowser(result)[0]
+    
     
     
     
