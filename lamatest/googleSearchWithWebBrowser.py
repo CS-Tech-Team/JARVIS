@@ -1,7 +1,10 @@
 import ollama
 import webbrowser
+import requests
+import search_api
+from bs4 import BeautifulSoup
 
-SYSTEM_PROMPT = "You are 'Al', a helpful AI Assistant that can determine which term to search on google."
+SYSTEM_PROMPT = "You are 'Al', a helpful AI Assistant that can determine which term to search on google.And term that you gave me is supposed to be between ** and ** not between 'and '. Like **searchterm**"
 
 
 def generate(prompt):
@@ -16,7 +19,28 @@ def formatPromptSearch(example):
 
     return "\n".join([sys_prompt, services_block, question, term])
 
-def openGoogleOnBrowser(modelResult):
+
+def return_last_url_to_search_api(modelResult):
+    search_term=modelResult.split("**")[1].replace(" ","+")
+    return search_term
+    
+
+    
+def openGoogleOnBrowser(link):
+    
+    webbrowser.open(link)
+    
+    
+
+    # webbrowser.open(last_url)
+    # return last_url
+
+
+    
+    
+    
+    
+    
     
     """
     extract the searchTerm from modelResult
@@ -44,18 +68,49 @@ def processRequest(data, model_name="llama3"):
     prompt = formatPromptSearch(data)
     output = generate(prompt)
 
-    print(output)
+    return output
+
+def analyze_link_to_access_content(searched_first_link):
+    result =requests.get(searched_first_link)
+    soup=BeautifulSoup(result.content,"html.parser")
+    # print(soup.text.strip())
+    return soup.text.strip()
+    
+    
+
+
 
 if __name__ == "__main__":
 
     exampleServices = ["google search"]
     
-    exampleRequest = "search Nural Networks on google."
+    exampleRequest = "What is the date of invention of internet"
     
     data = createInputFormat(exampleServices, exampleRequest)
     
     result = processRequest(data)
-    print(result)
+    search_query=result.split("**")[1]
+    search_query.replace('"',"")
+   
+    link=search_api.perform_google_search(search_query)
+ 
+    
+    print(link)
+    openGoogleOnBrowser(link)
+    content_of_link=analyze_link_to_access_content(link)
+    print(content_of_link)
+    
+    
+
+    # url=openGoogleOnBrowser(result)[0]
+    
+    
+    
+    
+    
+    
+    # print(result)
+    
     
     
 """
