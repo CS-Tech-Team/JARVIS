@@ -1,6 +1,11 @@
 import ollama
 import wikipedia
 
+
+
+#wikipedia.page("Apollo program").content
+wikipedia.summary("Apollo program")
+
 SYSTEM_PROMPT = "You are 'Al', a helpful AI Assistant that can determine which term to search on wikipedia and the goal of the search. Just write the goal and the wanted service and do not proceed more."
 
 
@@ -18,6 +23,7 @@ def formatPromptSearch(example):
     return "\n".join([sys_prompt, services_block, question, term, service])
 
 def getInfo(modelResult):
+    
     
     """
     extract the searchTerm from modelResult
