@@ -91,7 +91,7 @@ class LiveWhisper:
             text = ""
             for segment in segments:
                 if segment.no_speech_prob < speech_threshold:
-                    text += segment.text.lower().replace("thank you very much", "").replace("thank you", "")
+                    text += segment.text.lower()
             inference_time = time.perf_counter() - start
             sample_length = len(float64_buffer) / 16000  
             if text != "":
