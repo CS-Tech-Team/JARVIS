@@ -3,6 +3,8 @@ import pyaudio
 from faster_whisper import WhisperModel 
 import os 
 
+os.environ['KMP_DUPLICATE_LIB_OK']='TRUE'
+
 RATE = 16000
 CHUNK = 1024
 CHANNELS = 1
