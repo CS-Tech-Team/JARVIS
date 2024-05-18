@@ -3,6 +3,8 @@ import pyaudio
 from faster_whisper import WhisperModel 
 import os 
 
+os.environ['KMP_DUPLICATE_LIB_OK']='TRUE'
+
 RATE = 16000
 CHUNK = 1024
 CHANNELS = 1
@@ -50,6 +52,11 @@ def main():
     accumulated_transcription = ""
     
     try:
+        
+        print("listening...")
+        jarvis_mentioned = False
+        silence = 0
+        
         while True:
             chunk_File = "temp_chunk.wav"
             record_chunk(p, stream, chunk_File)
@@ -60,8 +67,25 @@ def main():
                 print(transcription)
             
             os.remove(chunk_File)
+            
+            transcription = transcription.lower().replace("Thank you.", "")
+            if "jarvis" in transcription:
+                print(transcription)
+                jarvis_mentioned = True
+                
+            if jarvis_mentioned:
+                accumulated_transcription += transcription
+                if len(transcription) == 0:
+                    silence += 1
+                if silence > 1:
+                    break    
+            
+
+        accumulated_transcription = "jarvis " + " ".join(accumulated_transcription.split("jarvis")[1:])
+        print(accumulated_transcription)
         
-            accumulated_transcription += transcription
+            
+            
     except KeyboardInterrupt:
         print("Final transcription: ", accumulated_transcription)
         stream.stop_stream()
