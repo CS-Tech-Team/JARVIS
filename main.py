@@ -22,9 +22,10 @@ while True:
         if "close" in text:
             os._exit(-1)
         
+        
         print(f"User: {text}")
-    
-    
-    
+
+
+
     except queue.Empty:
         print("No new voice received.")
