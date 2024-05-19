@@ -48,10 +48,11 @@ class LiveWhisper:
         CHUNK = int(RATE * FRAME_DURATION / 1000)
 
         microphones = LiveWhisper.list_microphones(audio)
+        # print(microphones)
         selected_input_device_id = LiveWhisper.get_input_device_id(
             device_name, microphones)
-
-        stream = audio.open(input_device_index=selected_input_device_id,
+        # print(selected_input_device_id)
+        stream = audio.open(input_device_index=2,
                             format=FORMAT,
                             channels=CHANNELS,
                             rate=RATE,
