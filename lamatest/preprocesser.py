@@ -1,13 +1,13 @@
 import ollama
+import utils
 
 moduleDetectionPrompt = open("firstPhasePrompt.txt", "r").read()
-modules = open("modules.txt", "r").read().split("\n")
-
+modules = utils.readYaml("modules.yaml")["modules"]
 
 def getTheModule(prompt):
 
     stream = ollama.chat(
-    model='phi3',
+    model='llama3',
     messages=[{'role': 'user', 'content': prompt}, {'role': 'system', 'content': moduleDetectionPrompt}],
     stream=False,
     )

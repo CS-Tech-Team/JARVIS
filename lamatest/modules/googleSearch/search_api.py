@@ -1,14 +1,9 @@
 import requests
-import googleSearchWithWebBrowser
+import lamatest.modules.googleSearch.googleSearchWithWebBrowser as googleSearchWithWebBrowser
 
 def perform_google_search(search_query):
     API_KEY = "AIzaSyBJQNCSHr8zzx5hrKwiJ6ZgJHkBZHEAqFY"
     SEARCH_ENGINE_ID = "5222eeec54f014650"
-    
-    
-    
-
-    
 
     url = 'https://www.googleapis.com/customsearch/v1'
     params = {
