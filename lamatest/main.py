@@ -1,60 +1,31 @@
-import ollama
+from preprocesser import getTheModule
 
-moduleDetectionPrompt = open("firstPhasePrompt.txt", "r").read()
 modules = open("modules.txt", "r").read().split("\n")
+print(modules)
+# ['Home Automation', 'Entertainment and Medias', 'Security and Monitoring', 'Weapons and Defense', 'Health and Wellness', 'Informational', 'google search module', 'wikipedia search module', 'other']
 
-# moduleDetectorModelFile = f'''
-# FROM dolphin-llama3
-# {moduleDetectionPrompt}'''
-
-
-#r = ollama.create(model='modeuleDetector', modelfile=moduleDetectorModelFile)
-# Home Automation
-# Personal Assistant
-# Entertainment and Media
-# Navigation and Travel
-# Shopping and Logistics
-# Security and Monitoring
-# Health and Wellness
-# Educational and Informational
-# Casual Talk  
-  
-while True:
+def main(prompt):
+    main_pompt = prompt
     
-    allocatedModule = ""
+    module = getTheModule(main_pompt)
     
-    message = input("You:")
-    if message == 'exit':
-        break
-    
-    stream = ollama.chat(
-    model='dolphin-llama3',
-    messages=[{'role': 'user', 'content': message}, {'role': 'system', 'content': moduleDetectionPrompt}],
-    stream=True,
-)
-
-    print("=======")
-    res = ""
-    for chunk in stream:
-        
-        chunk['message']['content']
-        res+=chunk['message']['content']
-        
-        foundModule = False
-        
-        for moduleName in modules:
-            if moduleName in res:
-                allocatedModule = moduleName
-                print("Module: " + moduleName)
-                res = ""
-                foundModule = True
-                break
-            
-        if foundModule:
-            break
-        
-    
-    if allocatedModule == "Home Automation":
-        print("Home Automation Module")
-    elif allocatedModule == "Web Browser":
-        print("Web Browser Module")
+    if module == "Home Automation":
+        return "Home Automation Module"
+    elif module == "Entertainment and Medias":
+        return "Entertainment and Medias Module"
+    elif module == "Security and Monitoring":
+        return "Security and Monitoring Module"
+    elif module == "Weapons and Defense":
+        return "Weapons and Defense Module"
+    elif module == "Health and Wellness":
+        return "Health and Wellness Module"
+    elif module == "Informational":
+        return "Informational Module"
+    elif module == "google search module":
+        return "google search module Module"
+    elif module == "wikipedia search module":
+        return "wikipedia search module Module"
+    elif module == "other":
+        return "Directly to JARVIS himself"
+    else:
+        return "Directly to JARVIS himself"

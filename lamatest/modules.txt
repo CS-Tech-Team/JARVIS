@@ -1,9 +1,9 @@
 Home Automation
-Web Module
-Entertainment and Media
-Navigation and Travel
-Shopping and Logistics
+Entertainment and Medias
 Security and Monitoring
+Weapons and Defense
 Health and Wellness
-Educational and Informational
-Casual Talk
+Informational
+google search module
+wikipedia search module
+other
