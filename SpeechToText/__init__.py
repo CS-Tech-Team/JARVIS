@@ -17,7 +17,7 @@ class LiveWhisperListener:
             self.asr.stop()
             exit()
 
-def speech_listener(q, model_name="medium.en", device_name="default", speech_threshold=0.5):
+def speech_listener(q, model_name="medium.en", device_name="default", speech_threshold=0.6):
     listener = LiveWhisperListener(model_name=model_name, device_name=device_name, speech_threshold=speech_threshold)
     listener.start(q)
 

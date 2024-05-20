@@ -1,0 +1,11 @@
+Given the user input, determine which of the following devices are need to be used.
+
+Devices:
+
+ElectroShock Device
+flamethrower
+face tracker
+other
+======
+
+just write the name of the deivce. If none of the modules fit then write "other". 
