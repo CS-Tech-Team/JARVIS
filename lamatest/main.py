@@ -1,4 +1,5 @@
 from preprocesser import getTheModule
+import yaml
 
 modules = open("modules.txt", "r").read().split("\n")
 print(modules)
@@ -29,3 +30,10 @@ def main(prompt):
         return "Directly to JARVIS himself"
     else:
         return "Directly to JARVIS himself"
+    
+    
+if __name__ == "__main__":
+    while True:
+        prompt = input("Enter your prompt: ")
+        print(main(prompt))
+        print("\n\n")

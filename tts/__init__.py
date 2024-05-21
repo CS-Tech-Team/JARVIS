@@ -6,4 +6,3 @@ tts.tts_to_file(text="It took me quite a long time to develop a voice, and now t
                 file_path="output.wav",
                 speaker_wav="test.wav",
                 language="en")
-

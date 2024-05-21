@@ -1,5 +1,8 @@
-import ollama
+import yaml
 
-moduleDetectionPrompt = open("firstPhasePrompt.txt", "r").read()
-modules = open("modules.txt", "r").read().split("\n")
-
+def readYaml(yamlfile):
+    with open(yamlfile) as stream:
+        try:
+            return yaml.safe_load(stream)
+        except yaml.YAMLError as exc:
+            return exc
