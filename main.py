@@ -1,6 +1,7 @@
 import queue
 import threading
 import os
+import decision_maker as jarvis
 
 from SpeechToText import speech_listener_thread
 
@@ -37,7 +38,11 @@ while True:
             
     
         if (text[-1] == "." or text[-1] == "?" or text[-1] == "!") and ("..."  != text[:-3]) and found_jarvis:
-            print(f"Prompt For Jarvis: {general_prompt}")
+            res = jarvis.get_res(general_prompt)
+            
+            print(f"User: {general_prompt}")
+            print("Jarvis: ", res)
+            
             general_prompt = ""
             found_jarvis = False
         

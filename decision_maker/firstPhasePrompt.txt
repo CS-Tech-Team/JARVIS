@@ -1,0 +1,16 @@
+Given the user input, determine which of the following modules the request should be processed by. Provide the module name.
+
+Modules:
+
+Home Automation
+Entertainment and Medias
+Security and Monitoring
+Weapons and Defense
+Health and Wellness
+Informational
+google search module
+wikipedia search module
+other
+======
+
+just write the name of the module. If none of the modules fit then write "other". 
