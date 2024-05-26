@@ -1,7 +1,7 @@
 import ollama
 import webbrowser
 import requests
-import lamatest.modules.googleSearch.search_api as search_api
+import decision_maker.modules.googleSearch.search_api as search_api
 from bs4 import BeautifulSoup
 
 SYSTEM_PROMPT = "You are 'Al', a helpful AI Assistant that can determine which term to search on google.And term that you gave me is supposed to be between ** and ** not between 'and '. Like **searchterm**"

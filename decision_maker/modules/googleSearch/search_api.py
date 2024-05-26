@@ -1,5 +1,5 @@
 import requests
-import lamatest.modules.googleSearch.googleSearchWithWebBrowser as googleSearchWithWebBrowser
+import decision_maker.modules.googleSearch.googleSearchWithWebBrowser as googleSearchWithWebBrowser
 
 def perform_google_search(search_query):
     API_KEY = "AIzaSyBJQNCSHr8zzx5hrKwiJ6ZgJHkBZHEAqFY"

@@ -6,3 +6,4 @@ def readYaml(yamlfile):
             return yaml.safe_load(stream)
         except yaml.YAMLError as exc:
             return exc
+        
