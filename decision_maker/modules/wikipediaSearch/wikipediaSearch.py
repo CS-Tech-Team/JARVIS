@@ -1,7 +1,7 @@
 import ollama
 import wikipedia
 
-SYSTEM_PROMPT = "You are 'Al', a helpful AI Assistant that can determine which term to search on wikipedia and the goal of the search. Just write the goal and the wanted service and do not proceed more."
+SYSTEM_PROMPT = "You are 'Al', a helpful AI Assistant that can determine which term to search on wikpedia. The user will ask a question about a term that could be answered via wikipedia, i want you to extract that term and give me the term inside to asterics (**) so i w ill know which term to search. Just write the search term do no overcomplicate things."
 
 
 def generate(prompt):
@@ -16,6 +16,7 @@ def formatPromptSearch(example):
     service = "Needed Service: \n"
 
     return "\n".join([sys_prompt, services_block, question, term, service])
+
 
 def getInfo(modelResult):
     
@@ -34,14 +35,15 @@ def summerizeYourself(modelResult):
     
     """
     
-    Extract the possible search term from the modelResult
+    step 1 : Extract the possible search term from the modelResult
     
-    Get the content of the page with:
+    step 2 : Get the content of the page with:
         wikipedia.page(searchKey).content
         
-    give this content to the llama model and tell it to summarize the content.
+    step 3 : get the content of the page and give this content to the llama model and tell it to summarize the content.
+            ollama.chat()
     
-    return the summrized content.    
+    step 4 : return the summrized content.    
     
         
     """
@@ -61,15 +63,18 @@ def processRequest(data, model_name="llama3"):
 
 if __name__ == "__main__":
 
-    exampleServices = ["get info", "summarize"]
+    exampleServices = ["get info"]
     
     exampleRequest = "What does it say about apollo program on wikipedia."
-    exampleRequest2 = "Can you summirize me what it tells about apollo program on wikipedia."
+    exampleRequest2 = "I want to study the life of George Washington on wikipedia."
     
-    data = createInputFormat(exampleServices, exampleRequest)
+    data = createInputFormat(exampleServices, exampleRequest2)
     
     result = processRequest(data)
     print(result)
+    
+    print(getInfo(result))
+    print(summerizeYourself(result))
     
     
 """
